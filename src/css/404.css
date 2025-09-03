@@ -1,0 +1,8 @@
+.not-found {
+  text-align: center;
+  padding: 3rem;
+}
+
+.not-found h2 {
+  color: red;
+}
