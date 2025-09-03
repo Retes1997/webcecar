@@ -19,6 +19,7 @@ import especializacionesCSS from "./css/especializaciones.css?inline";
 import contactoCSS from "./css/contacto.css?inline";
 import notFoundCSS from "./css/404.css?inline";
 import navbarCSS from "./css/navbar.css?inline";
+import footerCSS from "./css/footer.css?inline"; // 👈 cuidado: asegúrate que sea en minúscula
 
 // ---------------------------------------------------------------------------------
 
@@ -53,11 +54,33 @@ function injectCSS(css, path) {
     document.head.appendChild(styleTag);
   }
 
+  // inyectar footer.css si no existe
+  if (!document.querySelector("style[data-footer]")) {
+    const styleTag = document.createElement("style");
+    styleTag.textContent = footerCSS;
+    styleTag.setAttribute("data-footer", "true");
+    document.head.appendChild(styleTag);
+  }
+
   // inyectar css de la página actual
   const styleTag = document.createElement("style");
   styleTag.textContent = css;
   styleTag.setAttribute("data-page", path);
   document.head.appendChild(styleTag);
+}
+
+// ---------------------------------------------------------------------------------
+
+function initNavbarEvents() {
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+
+  if (hamburger && menu) {
+    hamburger.addEventListener("click", () => {
+      menu.classList.toggle("navbar__menu--active");
+      hamburger.classList.toggle("navbar__hamburger--active");
+    });
+  }
 }
 
 // ---------------------------------------------------------------------------------
@@ -72,11 +95,17 @@ function render(path) {
 
   injectCSS(route.css, isValid ? path : "404");
 
+  // renderizar HTML
   app.innerHTML = Navbar() + route.html + Footer();
+
+  // inicializar eventos después de renderizar
+  initNavbarEvents();
 
   return isValid ? path : "/404";
 }
 
+// ---------------------------------------------------------------------------------
+// Navegación
 function navigate(path) {
   const finalPath = render(path);
 
@@ -89,7 +118,7 @@ function navigate(path) {
 }
 
 // ---------------------------------------------------------------------------------
-
+// Delegación de eventos en enlaces
 document.addEventListener("click", (e) => {
   const link = e.target.closest("[data-link]");
   if (link) {
@@ -98,6 +127,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ---------------------------------------------------------------------------------
+// Manejar navegación con botones de atrás/adelante del navegador
+window.addEventListener("popstate", () => {
+  render(window.location.pathname);
+});
 
+// ---------------------------------------------------------------------------------
+// Primer render
 navigate(window.location.pathname);

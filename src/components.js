@@ -67,16 +67,6 @@ export function Navbar() {
         </ul>
       </div>
     </nav>
-
-    <script>
-      const hamburger = document.getElementById("hamburger");
-      const menu = document.getElementById("menu");
-
-      hamburger.addEventListener("click", () => {
-        menu.classList.toggle("navbar__menu--active");
-        hamburger.classList.toggle("navbar__hamburger--active");
-      });
-    </script>
   `;
 }
 
@@ -85,7 +75,74 @@ export function Navbar() {
 export function Footer() {
   return `
     <footer class="footer">
-      <p>© ${new Date().getFullYear()} WEBCECAR. Todos los derechos reservados.</p>
+      <div class="footer__container">
+        <!-- Contactos -->
+        <div class="footer__section">
+          <h3 class="footer__title">Contactos:</h3>
+          <ul class="footer__list">
+            <li>
+              <i class="fas fa-phone"></i>
+              970 265 729
+            </li>
+            <li>
+              <i class="fab fa-whatsapp"></i>
+              970 265 729
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              info@edcip.edu.pe
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              Av. República de Chile 478 <br />
+              Oficina 802, Jesús María | Lima Perú.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="footer__section">
+          <h3 class="footer__title">Redes Sociales</h3>
+          <div class="footer__icons">
+            <a
+              href="https://www.facebook.com/profile.php?id=61561921585595"
+              target="_blank"
+              class="footer__icon"
+              aria-label="Facebook"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://www.tiktok.com/@consorcio.cecarpe"
+              target="_blank"
+              class="footer__icon"
+              aria-label="TikTok"
+            >
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/consorcioeducativocecar/"
+              target="_blank"
+              class="footer__icon"
+              aria-label="Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Consultas -->
+        <div class="footer__section footer__consultas">
+          <p class="footer__consultas-text">Consultas</p>
+          <a href="#" class="footer__button">
+            <i class="fas fa-graduation-cap"></i> Verificación de Diplomas
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2025 WEBCECAR. Todos los derechos reservados.</p>
+      </div>
     </footer>
   `;
 }
