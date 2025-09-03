@@ -1,0 +1,235 @@
+/* ===========================
+   Navbar base
+=========================== */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  min-height: 72px;
+}
+
+/* ===========================
+   Logo
+=========================== */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar__logo-img {
+  height: 70px;
+  max-height: 110px;
+  width: auto;
+  object-fit: contain;
+  transition: opacity 0.1s ease;
+}
+
+.navbar__logo:hover .navbar__logo-img {
+  opacity: 0.75;
+}
+
+/* ===========================
+   Sección derecha
+=========================== */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ===========================
+   Redes sociales
+=========================== */
+.navbar__social {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.navbar__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0f1b33;
+  color: #fff;
+  font-size: 0.9rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  transition: opacity 0.1s ease, box-shadow 0.1s ease;
+}
+
+.navbar__social-link:hover {
+  opacity: 0.8;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ===========================
+   Menú
+=========================== */
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar__menu-link {
+  position: relative;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* Subrayado animado */
+.navbar__menu-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: #0f1b33;
+  transition: width 0.3s ease;
+}
+
+.navbar__menu-link:hover {
+  opacity: 0.8;
+  color: #0f1b33;
+}
+
+.navbar__menu-link:hover::after {
+  width: 100%;
+}
+
+/* ===========================
+   Botón hamburguesa
+=========================== */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar__hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #0f1b33;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Animación hamburguesa → X */
+.navbar__hamburger--active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar__hamburger--active span:nth-child(2) {
+  opacity: 0;
+}
+.navbar__hamburger--active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ===========================
+   Responsive intermedio (≤900px)
+=========================== */
+@media (max-width: 900px) {
+  .navbar {
+    min-height: 64px;
+  }
+
+  .navbar__logo-img {
+    height: 55px;
+  }
+
+  .navbar__menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%; /* empieza justo debajo de la navbar */
+    left: 0;
+    background: #fff;
+    border-top: 1px solid #eaeaea;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar__menu--active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .navbar__menu li {
+    width: 100%;
+  }
+
+  .navbar__menu-link {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Feedback en tap */
+  .navbar__menu-link:active,
+  .navbar__menu-link:focus {
+    background-color: #0f1b33;
+    color: #fff;
+    outline: none;
+  }
+
+  .navbar__menu-link::after {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+}
+
+/* ===========================
+   Responsive pequeño (≤450px)
+=========================== */
+@media (max-width: 450px) {
+  .navbar {
+    min-height: 56px;
+  }
+
+  .navbar__logo-img {
+    height: 45px;
+  }
+
+  .navbar__social {
+    display: none;
+  }
+}

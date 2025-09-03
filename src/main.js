@@ -18,6 +18,7 @@ import metodologiaCSS from "./css/metodologia.css?inline";
 import especializacionesCSS from "./css/especializaciones.css?inline";
 import contactoCSS from "./css/contacto.css?inline";
 import notFoundCSS from "./css/404.css?inline";
+import navbarCSS from "./css/navbar.css?inline";
 
 // ---------------------------------------------------------------------------------
 
@@ -41,6 +42,14 @@ function injectCSS(css, path) {
     const styleTag = document.createElement("style");
     styleTag.textContent = globalCSS;
     styleTag.setAttribute("data-global", "true");
+    document.head.appendChild(styleTag);
+  }
+
+  // inyectar navbar.css si no existe
+  if (!document.querySelector("style[data-navbar]")) {
+    const styleTag = document.createElement("style");
+    styleTag.textContent = navbarCSS;
+    styleTag.setAttribute("data-navbar", "true");
     document.head.appendChild(styleTag);
   }
 
